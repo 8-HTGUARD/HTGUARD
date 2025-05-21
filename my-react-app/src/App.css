@@ -1,0 +1,109 @@
+/* c:\Users\didxo\OneDrive\Desktop\3rd project code(flask)\my-react-app\src\App.css */
+
+/* 전체 요소에 box-sizing 적용 */
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+/* App 전체 컨테이너 스타일 */
+.container {
+	display: flex;
+	flex-direction: column; /* 자식 요소들을 수직으로 쌓음 */
+	height: 100vh; /* 뷰포트 전체 높이 사용 */
+	width: 100%;
+	max-width: 414px; /* 모바일 뷰포트 최대 너비 예시 */
+	margin: 0 auto; /* 중앙 정렬 */
+	overflow: hidden; /* 컨테이너 밖으로 내용이 넘치지 않도록 */
+	background-color: #f0f0f0; /* 앱 배경색 예시 */
+	padding-bottom: 60px; /* 하단 네비게이션 바 높이만큼 패딩 추가 */
+}
+
+/* 네비게이션 탭 컨테이너 스타일 */
+.navigation-tabs {
+	position: fixed;
+	bottom: 0;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 100%;
+	max-width: 414px; /* .container의 max-width와 동일하게 설정 */
+	display: flex;
+	justify-content: space-around; /* 버튼들을 균등하게 분배 */
+	align-items: center;
+	height: 60px; /* 네비게이션 바 높이 예시 */
+	background-color: #ffffff; /* 네비게이션 바 배경색 */
+	border-top: 1px solid #e0e0e0; /* 상단 구분선 */
+	z-index: 1000; /* 다른 콘텐츠 위에 오도록 설정 */
+}
+
+/* 개별 네비게이션 버튼 스타일 */
+.nav-button {
+	display: flex;
+	flex-direction: column; /* 아이콘과 텍스트를 수직으로 정렬 */
+	align-items: center; /* 수평 중앙 정렬 */
+	justify-content: center; /* 수직 중앙 정렬 (아이콘과 텍스트 전체 그룹) */
+	flex-grow: 1; /* 동일한 너비 차지 */
+	height: 100%;
+	border: none;
+	background: none;
+	cursor: pointer;
+	padding: 5px 10px; /* 내부 여백 조정 */
+	color: #9ca3af; /* 비활성 텍스트 색상 */
+	transition: color 0.3s ease;
+}
+
+.nav-button-icon {
+	width: 24px; /* 아이콘 크기 예시 */
+	height: 24px; /* 아이콘 크기 예시 */
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
+	margin-bottom: 4px; /* 아이콘과 텍스트 사이 간격 */
+}
+
+/* 각 아이콘에 대한 스타일 (실제 아이콘 경로로 수정 필요) */
+.icon-home {
+	background-image: url("./app/styles/asset/vector-wrapper.svg"); /* 홈 아이콘 경로 예시 */
+}
+.icon-chat {
+	background-image: url("./app/styles/asset/Vector-4.svg"); /* 챗봇 아이콘 경로 예시 */
+}
+.icon-analysis {
+	background-image: url("./app/styles/asset/Vector-5.svg"); /* 분석 아이콘 경로 예시 */
+}
+
+.nav-button-text {
+	font-size: 16px;
+	line-height: 1.2; /* 텍스트 줄 간격 */
+}
+
+/* 활성 네비게이션 버튼 스타일 */
+.nav-button.active {
+	color: #3b82f6; /* 활성 시 아이콘 및 텍스트 색상 */
+	/* 활성 상태 표시를 위한 추가 스타일 (예: 하단 선 또는 배경) */
+	position: relative;
+}
+
+/* 활성 탭 하단 선 예시 (필요시 사용) */
+/*
+.nav-button.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%; // 선의 너비
+  height: 2px; // 선의 두께
+  background-color: #3b82f6; // 선 색상
+}
+*/
+
+/* 메인 콘텐츠 영역 스타일 */
+.view-content {
+	flex-grow: 1; /* 남은 공간 모두 차지 (네비게이션 바 제외) */
+	overflow-y: auto; /* 내용이 넘칠 경우 스크롤 */
+	/* 각 페이지 컴포넌트에서 내부 패딩 관리 */
+}
+
+/* 필요에 따라 추가적인 전역 스타일 또는 유틸리티 클래스 정의 */

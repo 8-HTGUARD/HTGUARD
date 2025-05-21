@@ -1,0 +1,402 @@
+/* c:\Users\didxo\OneDrive\Desktop\3rd project code(flask)\my-react-app\src\app\styles\analysis.css */
+:root {
+	--primary-color: #3b82f6;
+	--text-color-dark: #000000;
+	--text-color-light: #ffffff;
+	--text-color-muted: #9ca3af;
+	--text-color-feedback: #111827; /* 피드백 텍스트용 */
+	--background-color-light: #ffffff;
+	--background-color-page: #f9fafb; /* 메인 콘텐츠 영역 배경 */
+	--border-color-light: #e0e0e0;
+	--border-color-feedback: #d1d5db; /* 피드백 박스 테두리 */
+	--font-family-roboto: "Roboto-Medium", Helvetica, sans-serif;
+	--font-family-inter: "Inter-Regular", Helvetica, sans-serif;
+	--font-family-inter-medium: "Inter-Medium", Helvetica, sans-serif;
+	--font-family-inter-bold: "Inter-Bold", Helvetica, sans-serif;
+}
+
+.analysis,
+.analysis * {
+	box-sizing: border-box;
+}
+
+/* 전체 페이지 컨테이너 */
+.analysis {
+	background: var(--background-color-light); /* 또는 전체 앱 배경색 */
+	display: flex;
+	justify-content: center;
+	width: 100%;
+	min-height: 100vh;
+}
+
+/* 화면 크기 및 기본 레이아웃 컨테이너 (main.css의 .main과 유사) */
+.analysis .overlap-wrapper {
+	background: var(--background-color-light);
+	width: 100%;
+	max-width: 393px; /* 디자인 기준 너비 */
+	height: 852px; /* 디자인 기준 높이, 실제 앱에서는 100vh 권장 */
+	display: flex;
+	flex-direction: column; /* 헤더와 콘텐츠 영역을 수직으로 배치 */
+	position: relative;
+	margin: 0 auto; /* 화면 중앙 정렬 */
+	/* overflow: hidden; */ /* 헤더 그림자가 잘리지 않도록 주석 처리 또는 제거 검토 */
+}
+
+/* 헤더 영역 (main.css .header 와 동일한 스타일) */
+.analysis .analysis-page-header {
+	background: var(--background-color-light);
+	width: 100%;
+	height: 48px; /* Or 60px if you prefer, like chat.css */
+	flex-shrink: 0; /* 높이 고정 */
+	position: relative; /* 로고 등 내부 요소의 absolute positioning 기준 */
+	box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.12);
+	display: flex;
+	align-items: center;
+	justify-content: center; /* Center title when logo is absolute */
+	padding: 0 16px; /* 좌우 여백 */
+	z-index: 10; /* 다른 콘텐츠 위에 오도록 */
+}
+
+/* 헤더 내 로고 (JSX에 <img className="logo" ... /> 추가 시 활성화) */
+.analysis .analysis-page-header .logo {
+	height: 29px;
+	width: 138px;
+	background-image: url(./asset/logo.svg); /* Ensure this path is correct: src/app/styles/asset/logo.svg */
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: center;
+	position: absolute;
+	left: 16px; /* Aligns with parent padding */
+	top: 50%;
+	transform: translateY(-50%);
+	z-index: 1;
+}
+
+/* 헤더 내 타이틀 ("HT GUARD") */
+.analysis .analysis-page-header .header-title {
+	color: var(--text-color-dark);
+	font-family: var(--font-family-roboto);
+	font-size: 20px;
+	font-weight: 500;
+	line-height: 24px;
+	/* margin: 0 auto; */ /* Removed: Parent justify-content:center handles this with absolute logo */
+	/* 로고가 있다면: margin-left: 10px; (로고와의 간격) 또는 flex-grow: 1; text-align: center; 등 활용 */
+}
+
+/* 메인 콘텐츠 스크롤 영역 (기존 .overlap 클래스 역할) */
+.analysis .analysis-content-area {
+	flex-grow: 1; /* 헤더를 제외한 나머지 모든 수직 공간 차지 */
+	overflow-y: auto; /* 내용이 많을 경우 스크롤 */
+	background-color: var(--background-color-page); /* 콘텐츠 영역 배경색 */
+	padding: 20px 16px; /* 상하좌우 여백 */
+	display: flex;
+	flex-direction: column;
+	gap: 24px; /* 각 콘텐츠 섹션 사이의 간격 */
+}
+
+/* 비디오 섹션 */
+.analysis .analysis-video-container {
+	/* 비디오를 감싸는 컨테이너 (필요시 사용) */
+	width: 100%;
+	display: flex;
+	justify-content: center;
+}
+.analysis .analysis-video {
+	/* JSX: <img className="analysis-video" ... /> */
+	width: 100%;
+	max-width: 361px; /* (393px - 16px*2 padding) */
+	height: 232px;
+	object-fit: cover;
+	border-radius: 8px;
+	background-color: #e0e0e0; /* 비디오 로딩 전 배경색 */
+}
+
+/* 점수 및 운동 횟수 섹션 - 새로운 카드로 대체됨 */
+.analysis .score-and-times-container {
+	display: none !important; /* 명시적으로 숨김 처리 */
+}
+
+/* 피드백 섹션 */
+.analysis .feedback-container {
+	background-color: var(--background-color-light);
+	border-radius: 12px;
+	border: 1px solid var(--border-color-feedback);
+	padding: 24px 16px 16px 16px; /* 상단 패딩을 늘려 라벨 공간 확보, 하단/우측 패딩은 아이콘 공간으로도 활용 */
+	display: flex; /* 내부 요소 정렬을 위해 유지, 단 아이콘은 absolute로 빠짐 */
+	/* justify-content: space-between; */ /* 아이콘이 absolute로 빠지므로, 라벨과 텍스트만 남음 */
+	align-items: flex-start;
+	gap: 12px; /* 라벨과 텍스트 사이 간격 (필요시 조정) */
+	position: relative; /* 내부 절대 위치 요소의 기준점 */
+}
+
+/* 피드백 라벨 (좌측 상단) */
+.analysis .feedback-container .feedback-label {
+	position: absolute; /* 피드백 컨테이너 기준 절대 위치 */
+	top: 8px; /* 상단에서 간격 */
+	left: 16px; /* 좌측에서 간격 (컨테이너 패딩과 일치) */
+	color: var(--primary-color); /* #3b82f6 색상 */
+	font-family: var(--font-family-inter-medium); /* 또는 Regular */
+	font-size: 10px; /* 매우 작게 */
+	font-weight: 500;
+}
+.analysis .feedback-container .feedback-text {
+	color: var(--text-color-feedback);
+	font-family: var(--font-family-inter);
+	font-size: 15px;
+	font-weight: 400;
+	line-height: 1.6;
+	flex-grow: 1; /* 남은 공간을 채움 */
+	margin-top: 0; /* 라벨 공간 확보를 위해 상단 패딩을 사용했으므로 텍스트 자체의 상단 마진 제거 */
+	padding-right: 24px; /* 우측에 복사 아이콘이 겹치지 않도록 충분한 공간 확보 (아이콘 크기 + 여백) */
+	word-break: break-word;
+}
+
+/* 합쳐진 복사 아이콘을 위한 래퍼 (우측 하단으로 이동 및 크기 축소) */
+.analysis .feedback-container .copy-icon-wrapper {
+	cursor: pointer;
+	width: 16px; /* 아이콘 전체 너비 축소 */
+	height: 18px; /* 아이콘 전체 높이 축소 */
+	position: absolute; /* 부모(.feedback-container) 기준 절대 위치 */
+	bottom: 16px; /* 하단 패딩 영역 내 위치 */
+	right: 16px; /* 우측 패딩 영역 내 위치 */
+	outline: none; /* 기본 아웃라인 제거 */
+}
+.analysis .feedback-container .copy-icon-wrapper:focus-visible {
+	outline: 2px solid var(--primary-color); /* 포커스 시 아웃라인 표시 */
+	outline-offset: 2px;
+}
+
+/* 합쳐진 복사 아이콘의 각 부분 (기본 및 오버레이) */
+.analysis .feedback-container .copy-icon-base,
+.analysis .feedback-container .copy-icon-overlay {
+	position: absolute;
+	width: 100%; /* 래퍼 크기에 맞춤 */
+	height: 100%; /* 래퍼 크기에 맞춤 */
+	object-fit: contain;
+}
+
+.analysis .feedback-container .copy-icon-base {
+	top: 0;
+	left: 0;
+}
+.analysis .feedback-container .copy-icon-overlay {
+	top: 1px; /* 오버레이를 살짝 아래로 이동 (크기 축소에 맞춰 조정) */
+	left: 1px; /* 오버레이를 살짝 오른쪽으로 이동 (크기 축소에 맞춰 조정) */
+}
+
+/* 평가 기준 버튼 영역 (피드백 박스 위, 우측 정렬, 아이콘-텍스트 가로 배치) */
+.analysis .evaluation-button-area {
+	display: flex; /* 아이콘과 텍스트를 가로로 배치 */
+	flex-direction: row; /* 명시적으로 가로 방향 설정 (기본값이지만) */
+	align-items: center; /* 수직 중앙 정렬 */
+	align-self: flex-end; /* 부모(.analysis-content-area) 내에서 오른쪽으로 정렬 */
+	gap: 4px; /* 아이콘과 텍스트 사이 간격 */
+	cursor: pointer;
+	padding: 4px 8px; /* 좌우 패딩 추가 */
+	margin-bottom: 8px; /* 피드백 박스와의 간격 */
+	transition: background-color 0.2s;
+	border-radius: 4px; /* 약간의 둥근 모서리 (선택 사항) */
+	/* 키보드 접근성 포커스 스타일 */
+	outline: none; /* 기본 아웃라인 제거 */
+}
+.analysis .evaluation-button-area:hover {
+	background-color: rgba(0, 0, 0, 0.03); /* 호버 효과 */
+}
+.analysis .evaluation-button-area:focus-visible {
+	outline: 2px solid var(--primary-color); /* 포커스 시 아웃라인 표시 */
+	outline-offset: 2px;
+}
+
+.analysis .evaluation-button-area .evaluation-icon {
+	width: 16px; /* 아이콘 크기 더 작게 조정 (느낌표 아이콘에 맞게) */
+	height: 16px; /* 아이콘 크기 더 작게 조정 */
+	object-fit: contain;
+}
+.analysis .evaluation-button-area .text-wrapper-8 {
+	color: var(--primary-color);
+	font-family: var(--font-family-inter-medium);
+	font-size: 12px; /* 텍스트 크기 유지 */
+	font-weight: 500; /* bold 대신 medium으로 변경 (선택 사항) */
+	line-height: 1.5;
+}
+
+/* 평가 기준 모달 스타일 */
+.analysis .evaluation-modal-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(0, 0, 0, 0.6);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 1000;
+	padding: 20px;
+}
+.analysis .evaluation-modal-content {
+	background-color: var(--background-color-light);
+	padding: 24px;
+	border-radius: 12px;
+	max-width: 90%;
+	width: 360px;
+	position: relative;
+	text-align: left;
+	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+.analysis .evaluation-modal-content .close-modal-button {
+	position: absolute;
+	top: 12px;
+	right: 12px;
+	background: none;
+	border: none;
+	font-size: 28px;
+	line-height: 1;
+	cursor: pointer;
+	color: #888;
+}
+.analysis .evaluation-modal-content .close-modal-button:hover {
+	color: #333;
+}
+.analysis .evaluation-modal-content h2 {
+	margin-top: 0;
+	margin-bottom: 16px;
+	font-family: var(--font-family-roboto);
+	font-size: 18px;
+	color: var(--text-color-dark);
+}
+.analysis .evaluation-modal-content .evaluation-modal-image {
+	max-width: 100%;
+	height: auto;
+	border-radius: 8px;
+	margin-bottom: 16px;
+	border: 1px solid var(--border-color-light);
+}
+.analysis .evaluation-modal-content p {
+	font-family: var(--font-family-inter);
+	font-size: 14px;
+	line-height: 1.7;
+	color: #333;
+	margin-bottom: 8px;
+}
+.analysis .evaluation-modal-content p:last-child {
+	margin-bottom: 0;
+}
+
+/* New Exercise Summary Card */
+.analysis .exercise-summary-card {
+	background-color: var(--background-color-light);
+	border-radius: 12px;
+	box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.08); /* Softer shadow */
+	padding: 16px;
+	display: flex;
+	flex-direction: column;
+	gap: 16px; /* Gap between top row and feedback quote */
+	width: 100%;
+}
+
+.analysis .exercise-summary-card .summary-top-row {
+	display: flex;
+	align-items: stretch; /* Makes both boxes in the row of equal height */
+	gap: 12px;
+}
+
+.analysis .exercise-summary-card .summary-score-box {
+	background-color: var(--primary-color);
+	color: var(--text-color-light);
+	width: 72px; /* 점수창 너비 증가 */
+	height: 72px; /* 점수창 높이 증가 */
+	border-radius: 8px;
+	display: flex;
+	align-items: baseline; /* Aligns "85" and "점" nicely */
+	justify-content: center;
+	padding: 8px;
+	flex-shrink: 0;
+}
+
+.analysis .exercise-summary-card .summary-score-box .score-value {
+	font-family: var(--font-family-inter-bold);
+	font-size: 30px; /* 점수 폰트 크기 증가 */
+	font-weight: 700;
+}
+
+.analysis .exercise-summary-card .summary-score-box .score-unit {
+	font-family: var(--font-family-inter-medium);
+	font-size: 12px;
+	font-weight: 500;
+	margin-left: 2px;
+}
+
+.analysis .exercise-summary-card .summary-count-box {
+	background-color: var(--background-color-light);
+	border: 1px solid var(--border-color-light);
+	border-radius: 8px;
+	padding: 6px 12px; /* 세로 padding 약간 줄임 */
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	flex-grow: 1;
+	text-align: center;
+	min-height: 60px; /* 점수창과 높이를 맞추기 위해 stretch 되므로, 이 값은 최소 보장치 */
+}
+
+.analysis .exercise-summary-card .summary-count-box .count-box-label {
+	font-family: var(--font-family-inter);
+	font-size: 10px;
+	color: var(--text-color-muted);
+	margin-bottom: 4px;
+}
+
+.analysis .exercise-summary-card .summary-count-box .count-box-text {
+	font-family: var(--font-family-inter-medium);
+	font-size: 14px;
+	color: var(--text-color-dark);
+	line-height: 1.4;
+}
+.analysis .exercise-summary-card .summary-count-box .count-box-text span {
+	font-family: var(--font-family-inter-bold);
+	font-weight: 700;
+}
+
+.analysis .exercise-summary-card .summary-feedback-quote {
+	font-family: var(--font-family-inter);
+	font-size: 14px;
+	color: var(--text-color-feedback);
+	text-align: center;
+	padding-top: 8px; /* Optional: space above quote if needed */
+}
+.analysis .exercise-summary-card .summary-feedback-quote p {
+	margin: 0;
+	line-height: 1.5;
+	word-break: break-word; /* 단어 단위 줄바꿈 */
+}
+
+/* 네비게이션 및 불필요한 피그마 익스포트 스타일 - 모두 숨김 처리 */
+.analysis .analysis-navigation,
+.analysis .wifi, .analysis .cellular, .analysis .battery, .analysis .time, /* 상태 표시줄 아이콘 */
+.analysis .analysis-feedback, /* 이전 피드백 컨테이너 */
+.analysis .overlap-group,    /* 이전 피드백 내부 컨테이너 */
+.analysis .img,               /* 이전 피드백 내부의 일반적인 img 클래스 (새로운 .copy-icon 등으로 대체) */
+.analysis .div,               /* 이전 피드백 내부의 일반적인 div 클래스 */
+.analysis .vector,            /* 이전 네비게이션 아이콘 */
+.analysis .vector-2,          /* 이전 네비게이션 아이콘 */
+.analysis .vector-3,
+.analysis .vector-4,
+.analysis .vector-5,
+.analysis .vector-6,
+.analysis .rectangle,
+.analysis .overlap-2,
+.analysis .overlap-3,
+.analysis .home,
+.analysis .chat,
+.analysis .anlaysis,
+.analysis .text-wrapper-4,    /* 이전 네비게이션 텍스트 */
+.analysis .text-wrapper-5,
+.analysis .text-wrapper-6,
+.analysis .evaluation,
+.analysis .evaluation-button, /* 이전 평가 버튼 컨테이너 */
+.analysis .text-wrapper-9,    /* 이전 평가 기준 텍스트 */
+.analysis .analysis-body      /* JSX에서 빈 div로 확인됨 */ {
+	display: none !important;
+}

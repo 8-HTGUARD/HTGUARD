@@ -1,0 +1,383 @@
+/* c:\Users\didxo\OneDrive\Desktop\3rd project code(flask)\my-react-app\src\app\styles\chat.css */
+.chat,
+.chat * {
+	box-sizing: border-box;
+}
+.chat {
+	background: #ffffff;
+	/* border-radius: 8px; */ /* 전체 컨테이너의 radius는 App.jsx 레벨에서 관리될 수 있음 */
+	/* border-style: solid; */
+	/* border-color: #ced4da; */
+	/* border-width: 2px; */
+	display: flex;
+	flex-direction: column;
+	/* gap: 0px; */ /* 각 섹션의 margin/padding으로 조절 */
+	/* align-items: flex-start; */ /* stretch가 기본값, 필요시 설정 */
+	/* justify-content: flex-start; */
+	height: 852px; /* 디자인 시안의 고정 높이, 실제 앱에서는 100vh 또는 부모 높이 100% 권장 */
+	position: relative; /* 필요시 내부 absolute 요소 기준 */
+	overflow: hidden; /* 내부 요소가 넘치는 것을 방지 */
+	width: 100%; /* 디자인 시안의 고정 너비, 실제 앱에서는 100% 또는 max-width 권장 */
+	max-width: 500px;
+	margin: 0 auto; /* 고정 너비일 경우 중앙 정렬 */
+}
+
+/* 로고 - 헤더 내부에 배치 */
+.chat .logo {
+	height: 29px;
+	width: 138px;
+	background-image: url(./asset/logo.svg);
+	background-repeat: no-repeat;
+	background-size: contain; /* 로고가 잘리지 않고 비율에 맞게 표시되도록 */
+	background-position: center; /* position: absolute와 함께 사용 시, left/top으로 위치 제어 */
+	position: absolute;
+	left: 12px;
+	top: 50%;
+	transform: translateY(-50%);
+	/* margin-left는 absolute positioning 사용 시 불필요 */
+	z-index: 1; /* 다른 형제 요소들보다 위에 표시되도록 z-index 추가 */
+}
+
+/* 채팅 헤더 */
+.chat .chat-header {
+	background: #ffffff;
+	display: flex; /* 내부 요소 정렬 위해 */
+	flex-direction: column; /* chat-time 과 chat-header-name 수직 정렬 */
+	align-items: stretch; /* 자식 요소들이 전체 너비 차지 */
+	flex-shrink: 0; /* 헤더 높이 고정 */
+	width: 100%; /* 부모 요소(.chat)의 전체 너비를 차지하도록 명시 */
+	box-shadow: none; /* .chat-header-name 에 그림자를 적용하므로 여기는 그림자 없음 */
+	/*box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.12);
+	z-index: 10; /* 다른 스크롤 콘텐츠 위에 있도록 */
+}
+
+/* 상태바 (시간, 와이파이 등) - 디자인 시안에 따라 구현 */
+/*.chat .chat-time {
+	align-self: stretch;
+	flex-shrink: 0;
+	height: 24px; /* 상태바 높이 */
+/*	position: relative;
+	display: flex;
+	justify-content: flex-end; /* 아이콘들을 오른쪽으로 정렬 */
+/*	align-items: center;
+	padding: 0 10px; /* 좌우 여백 */
+/*	gap: 6px; /* 아이콘 사이 간격 */
+/*	background-color: #fff; /* 헤더와 동일한 배경 또는 투명 */
+
+/*.chat .chat-time > div {
+	/* 각 상태 아이콘 (wifi, cellular, battery, time text) */
+/*	height: 14px;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: contain;
+}
+/*.chat .status-wifi {
+	width: 18px;
+	background-image: url(./asset/wifi.svg);
+}
+.chat .status-cellular {
+	width: 14px;
+	background-image: url(./asset/cellular.svg);
+}
+.chat .status-battery {
+	width: 9px;
+	background-image: url(./asset/battery.svg);
+}
+.chat .status-time-text {
+	width: auto; /* 텍스트 길이에 맞게 */
+/*font-size: 12px; /* 시간 텍스트 크기 */
+/*color: #000;
+	line-height: 14px;
+}*/
+
+.chat .chat-header-name {
+	/*padding: 0 16px; /* 좌우 패딩만 사용, 상하는 height로 조절 */
+	display: flex;
+	align-items: center; /* 내부 플로우 컨텐츠 세로 중앙 정렬 */
+	justify-content: flex-end; /* 로고는 absolute, 나머지 컨텐츠(예: 카테고리 선택) 오른쪽 정렬 */
+	flex-shrink: 0;
+	width: 100%; /* main.css 헤더와 동일하게 100% 너비 사용, calc 트릭 제거 */
+	height: 60px; /* 헤더 높이 증가 (기존 48px) */
+	position: relative; /* 로고의 absolute positioning 기준 */
+	background-color: #ffffff;
+	box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.12); /* main.css 헤더와 동일한 그림자 적용 */
+}
+.chat .title {
+	/* "AI챗봇" 타이틀 */
+	display: none;
+	color: #000000;
+	text-align: right; /* 오른쪽 정렬 */
+	font-family: "Roboto-Medium", sans-serif;
+	font-size: 14px;
+	line-height: 22px;
+	font-weight: 500;
+	/* position: absolute; */ /* 제거 */
+	/* left, top, width 제거 */
+}
+
+/* 채팅 본문 (메시지 스크롤 영역) */
+.chat .chat-body {
+	background: #fafafa; /* 채팅 배경색 */
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1; /* 사용 가능한 모든 수직 공간 차지 */
+	position: relative; /* 내부 요소 absolute positioning 기준 (필요시) */
+	overflow-y: auto; /* 메시지 많을 시 스크롤 */
+	padding: 10px; /* 메시지 목록 상하좌우 여백 */
+	border-radius: 12px; /* 채팅 바디 모서리 둥글게 */
+	/* padding-bottom: calc(79px+10px); */ /* 하단 네비게이션 제거로 인해 원래 padding-bottom (10px)으로 돌아감 */
+}
+.chat .main {
+	/* 메시지들이 실제로 담기는 컨테이너 (chat-body의 직접 자식) */
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	gap: 12px; /* 메시지 사이 간격 */
+}
+
+/* 메시지 한 줄 (message-row) 공통 스타일 */
+.chat .message-row {
+	display: flex;
+	/* max-width: 85%; */ /* 제거: 말풍선 자체의 max-width로 제어 */
+	align-items: flex-end; /* 아바타와 말풍선 하단 정렬 */
+}
+
+/* 봇 메시지 스타일 */
+.chat .bot-message {
+	align-self: flex-start; /* 왼쪽 정렬 */
+}
+.chat .bot-message .chat-man-img {
+	/* 봇 아바타 컨테이너 */
+	width: 32px;
+	height: 32px;
+	border-radius: 50%;
+	overflow: hidden;
+	margin-right: 8px;
+	flex-shrink: 0;
+	background-color: #e0e0e0; /* 임시 아바타 배경 */
+}
+.chat .bot-message .chat-man-img .img {
+	/* 아바타 이미지 (실제 img 태그나 div 배경) */
+	width: 100%;
+	height: 100%;
+	/* background-image: url(./asset/bot-avatar.svg); */ /* 실제 봇 아바타 이미지 */
+	background-size: cover;
+	background-position: center;
+}
+.chat .bot-message .div2 {
+	/* 봇 말풍선 */
+	background: #ffffff;
+	border-radius: 8px;
+	padding: 10px 12px;
+	box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.05);
+	word-break: break-word; /* 긴 단어 줄바꿈 */
+	max-width: 70%; /* 상담사 말풍선 최대 너비 설정 */
+}
+.chat .bot-message .chat-help-mention {
+	/* 말풍선 내부 텍스트 컨테이너 */
+	/* 특별한 스타일 없으면 제거 가능 */
+}
+.chat .bot-message .div3, /* 봇 메시지 텍스트 */
+.chat .bot-message .div4 {
+	/* 봇 메시지 텍스트 (여러 줄일 경우) */
+	color: #262626;
+	font-family: "Inter-Regular", sans-serif;
+	font-size: 16px;
+	line-height: 1.4; /* 줄 간격 */
+	font-weight: 400;
+}
+
+/* 사용자 메시지 스타일 */
+.chat .user-message {
+	align-self: flex-end; /* 오른쪽 정렬 */
+	flex-direction: row-reverse; /* 아바타-말풍선 순서 반전 */
+}
+.chat .user-message .div6 {
+	/* 사용자 아바타 컨테이너 */
+	width: 32px;
+	height: 32px;
+	border-radius: 50%;
+	overflow: hidden;
+	margin-left: 8px;
+	flex-shrink: 0;
+	background-color: #d1e7fd; /* 임시 아바타 배경 */
+}
+.chat .user-message .div6 .img2 {
+	/* 아바타 이미지 */
+	width: 100%;
+	height: 100%;
+	/* background-image: url(./asset/user-avatar.svg); */ /* 실제 사용자 아바타 이미지 */
+	background-size: cover;
+	background-position: center;
+}
+.chat .user-message .div7 {
+	/* 사용자 말풍선 */
+	background: #e5e5e5; /* 기존 #e5e5e5 사용 */
+	/* background: #007bff; */ /* 파란색 계열 예시 */
+	/* color: white; */ /* 파란색 배경일 경우 텍스트 색상 */
+	border-radius: 8px;
+	padding: 10px 12px;
+	word-break: break-word;
+	max-width: 70%; /* 사용자 말풍선 최대 너비 설정 */
+}
+.chat .user-message .p {
+	/* 말풍선 내부 텍스트 컨테이너 */
+	/* 특별한 스타일 없으면 제거 가능 */
+}
+.chat .user-message .div8 {
+	/* 사용자 메시지 텍스트 */
+	color: #262626; /* #e5e5e5 배경일 때 */
+	/* color: white; */ /* 파란색 배경일 때 */
+	font-family: "Inter-Regular", sans-serif;
+	font-size: 16px;
+	line-height: 1.4;
+	font-weight: 400;
+}
+
+/* 채팅 입력창 */
+.chat .chat-input {
+	background: #ffffff;
+	border-top: 1px solid #e5e5e5;
+	width: 100%;
+	height: 75px;
+	flex-shrink: 0; /* 높이 고정 */
+	display: flex;
+	align-items: center;
+	padding: 0 16px; /* 좌우 여백 */
+}
+.chat .div9 {
+	/* 입력창 내부 요소들 컨테이너 */
+	display: flex;
+	align-items: center;
+	width: 100%;
+	gap: 8px; /* 요소들 사이 간격 */
+}
+.chat .chat-plus-button {
+	width: 32px; /* 버튼 크기 */
+	height: 32px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	/* background-image: url(./asset/plus_icon.svg); */ /* 실제 플러스 아이콘 */
+	/* background-repeat: no-repeat; */
+	/* background-position: center; */
+	/* background-size: 16px; */ /* 아이콘 크기 */
+	border: 1px solid #ccc; /* 임시 테두리 */
+	border-radius: 50%;
+}
+.chat .chat-plus-button .frame4 {
+	/* 플러스 아이콘 이미지 (img 태그 사용할 경우) */
+	width: 16px;
+	height: 16px;
+}
+.chat .chat-input-textbox {
+	/* 텍스트 입력 필드 감싸는 div */
+	background: #ffffff;
+	border-radius: 21px; /* 9999px 대신 height/2 */
+	border: 1px solid #d4d4d4;
+	height: 42px;
+	flex-grow: 1; /* 사용 가능한 공간 모두 차지 */
+	display: flex; /* 내부 input 정렬 위해 */
+	align-items: center;
+	padding: 0 16px; /* 내부 input의 좌우 여백 */
+}
+.chat .chat-input-textbox input[type="text"] {
+	/* 실제 input 요소 */
+	width: 100%;
+	height: 100%;
+	border: none;
+	outline: none;
+	font-size: 16px;
+	font-family: "Inter-Regular", sans-serif;
+	background-color: transparent;
+	color: #262626;
+}
+.chat .chat-input-textbox input[type="text"]::placeholder {
+	/* 플레이스홀더 스타일 */
+	color: #adaebc;
+	font-family: "Inter-Regular", sans-serif;
+}
+.chat .div10 {
+	/* 플레이스홀더 텍스트 스타일 (input::placeholder로 대체) */
+	display: none; /* 실제 input의 placeholder 사용 */
+}
+.chat .input-button {
+	/* 전송 버튼 */
+	width: 32px;
+	height: 32px;
+	background-image: url(./asset/chat_input_icon.svg);
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: contain; /* 아이콘 크기에 맞게 */
+	cursor: pointer;
+	border: none;
+	background-color: transparent;
+}
+
+/* 하단 네비게이션 */
+.chat .chat-navigation {
+	display: none; /* 하단 네비게이션 바 전체를 숨김 */
+}
+
+/* 아래는 .chat-navigation이 display: none 이므로 실제로는 보이지 않게 됩니다. */
+/* 하지만 구조상 남겨두거나, 필요 없다면 완전히 삭제해도 됩니다. */
+.chat .group-17 {
+	/* 네비게이션 아이템들 컨테이너 */
+	display: flex;
+	justify-content: space-around; /* 아이템 균등 배분 */
+	align-items: center; /* 수직 중앙 정렬 */
+	width: 100%;
+	height: 100%;
+	padding: 0 10px; /* 좌우 약간의 여백 */
+}
+
+/* 각 네비게이션 아이템 (Home, ChatBot, Analysis) 공통 스타일 */
+.chat .group-15, /* Home */
+.chat .group-13, /* ChatBot */
+.chat .group-14  /* Analysis */ {
+	display: none; /* 각 네비게이션 아이템도 숨김 (상위 .chat-navigation이 숨겨지므로 중복될 수 있으나 명확성을 위해 유지) */
+	flex-direction: column; /* 아이콘과 텍스트 수직 정렬 */
+	align-items: center; /* 수평 중앙 정렬 */
+	justify-content: center; /* 수직 중앙 정렬 */
+	flex: 1; /* 동일한 너비 차지 */
+	height: 100%; /* 부모 높이 전체 사용 */
+	cursor: pointer;
+	padding: 8px 0; /* 내부 상하 여백 */
+	position: relative; /* 활성 상태 표시를 위한 기준점 */
+}
+
+/* Analysis 아이템 (실제로는 .group-14가 display: none 이므로 보이지 않음) */
+.chat .group-14 .vector3 {
+	width: 28px;
+	height: 20px;
+	background-image: url(./asset/Vector-5.svg);
+}
+.chat .group-14 .analysis {
+	color: #9ca3af;
+	font-family: "Roboto-Medium", sans-serif;
+	font-size: 12px;
+	line-height: 18px;
+	font-weight: 500;
+	white-space: nowrap;
+}
+
+/* JavaScript로 .active 클래스 추가 시 활성 탭 스타일 (실제로는 보이지 않음) */
+.chat .group-15.active .home,
+.chat .group-14.active .analysis {
+	color: #3b82f6;
+}
+/* Home 또는 Analysis 탭 활성 시 배경 (실제로는 보이지 않음) */
+.chat .group-15.active::before,
+.chat .group-14.active::before {
+	content: "";
+	background: #3b82f6;
+	border-radius: 16px;
+	width: 60px;
+	height: 30px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -60%);
+	z-index: 0;
+}

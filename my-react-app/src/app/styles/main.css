@@ -1,0 +1,634 @@
+/* c:\Users\didxo\OneDrive\Desktop\3rd project code(flask)\my-react-app\src\app\styles\main.css */
+.main,
+.main * {
+	box-sizing: border-box;
+}
+.main {
+	background: #ffffff;
+	padding: 0px 0px 80px 0px; /* 하단 네비게이션 바 높이(약 79px) + 약간의 여유를 고려한 padding-bottom */
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+	align-items: center;
+	/* justify-content: flex-start; */ /* 하단 네비게이션을 고려하여 변경 또는 제거 */
+	height: 852px;
+	position: relative; /* 자식 요소의 absolute positioning 기준 */
+}
+.main .header {
+	background: #ffffff;
+	align-self: stretch;
+	flex-shrink: 0;
+	height: 48px;
+	position: relative;
+	box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.12);
+	width: 100%; /* 추가: 헤더가 전체 너비를 차지하도록 */
+}
+.main .logo {
+	height: 29px;
+	left: 12px; /* 로고 위치 조정 (기존 2px에서 약간 안쪽으로) */
+	object-fit: cover;
+	position: absolute;
+	top: 50%; /* 세로 중앙 정렬을 위해 */
+	transform: translateY(-50%); /* 세로 중앙 정렬 */
+	width: 138px;
+	background-image: url(./asset/logo.svg);
+	background-repeat: no-repeat;
+	background-size: contain; /* 로고가 잘리지 않도록 */
+}
+
+/* .main .overlap-group, .main .top 관련 스타일은 현재 JSX 구조와 불일치하거나 중복될 수 있어 주석 처리 또는 검토 필요 */
+/*
+.main .overlap-group {
+	height: 46px;
+	position: relative;
+	width: 393px;
+}
+.main .top {
+	background-color: #ffffff;
+	height: 24px;
+	left: 0;
+	position: absolute;
+	top: 0;
+	width: 393px;
+}
+*/
+
+/* 상태바 아이콘 (wifi, cellular, battery, time)은 App.jsx에서 전역으로 관리하거나,
+   각 페이지 상단에 일관된 방식으로 배치하는 것을 권장합니다.
+   main.css에서 개별적으로 위치를 잡는 것은 다른 페이지와 충돌할 수 있습니다.
+   필요하다면 주석 해제 후 App.jsx의 네비게이션 바 높이를 고려하여 top 값을 조정해야 합니다. */
+/*
+.main .time {
+	height: 10px;
+	left: 351px;
+	position: absolute;
+	top: 7px;
+	width: 34px;
+	background-image: url(./asset/time.svg);
+}
+.main .battery {
+	height: 14px;
+	left: 333px;
+	position: absolute;
+	top: 5px;
+	width: 9px;
+	background-image: url(./asset/battery.svg);
+}
+.main .cellular {
+	height: 14px;
+	left: 310px;
+	position: absolute;
+	top: 5px;
+	width: 14px;
+	background-image: url(./asset/cellular.svg);
+}
+.main .wifi {
+	height: 14px;
+	left: 290px;
+	position: absolute;
+	top: 5px;
+	width: 18px;
+	background-image: url(./asset/wifi.svg);
+}
+*/
+
+.main .category {
+	padding: 0px 12px 0px 12px;
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+	align-items: center; /* 내부 아이템들 중앙 정렬 */
+	justify-content: flex-start;
+	align-self: stretch;
+	flex-shrink: 0;
+	position: relative;
+	/* overflow: hidden; */ /* overflow는 필요시 주석 해제 */
+}
+.main .text-wrapper {
+	/* 카테고리 제목 */
+	color: #000000;
+	text-align: left;
+	font-family: "Roboto-Medium", sans-serif;
+	font-size: 14px;
+	line-height: 20px;
+	font-weight: 500;
+	position: relative;
+	align-self: stretch;
+	margin-top: -1px; /* 디자인 일관성을 위한 미세 조정 */
+}
+.main .chip-group {
+	display: flex;
+	flex-direction: row;
+	gap: 8px;
+	align-items: flex-start;
+	justify-content: flex-start; /* 칩들을 왼쪽부터 정렬 */
+	align-self: stretch;
+	flex-shrink: 0;
+	position: relative;
+}
+.main .chip {
+	background: rgba(0, 0, 0, 0.05);
+	border-radius: 6px;
+	padding: 8px;
+	display: inline-flex; /* inline-flex로 변경하여 내용에 맞게 크기 조절 */
+	flex-direction: column;
+	gap: 0px;
+	align-items: center;
+	justify-content: center;
+	flex-shrink: 0;
+	position: relative;
+	cursor: pointer; /* 클릭 가능함을 표시 */
+}
+.main .element {
+	/* 칩 내부 텍스트 (기존 _1, _2, _3을 통합) */
+	color: #000000;
+	text-align: left;
+	font-family: "Roboto-Regular", sans-serif;
+	font-size: 14px;
+	line-height: 20px;
+	font-weight: 400;
+	position: relative;
+	white-space: nowrap; /* 텍스트가 한 줄로 표시되도록 */
+	width: fit-content; /* 내용에 맞게 너비 조절 */
+	margin-top: -1px; /* 디자인 일관성을 위한 미세 조정 */
+}
+
+.main .info {
+	color: rgba(0, 0, 0, 0.5);
+	text-align: left;
+	font-family: "Roboto-Regular", sans-serif;
+	font-size: 12px;
+	line-height: 16px;
+	font-weight: 400;
+	position: relative;
+	align-self: stretch;
+}
+.main .view {
+	/* 운동 선택, 운동 설명 섹션 컨테이너 */
+	padding: 0px 12px 0px 12px;
+	align-self: stretch;
+	flex-shrink: 0;
+	/* height: 165px; */ /* 내부 콘텐츠에 따라 높이가 유동적으로 변하도록 auto 또는 제거 */
+	position: relative;
+}
+.main .section-title {
+	padding: 16px 0px 0px 0px;
+	display: flex;
+	flex-direction: row;
+	gap: 12px;
+	align-items: center;
+	justify-content: flex-start;
+	/* width: 336px; */ /* align-self: stretch로 변경 */
+	align-self: stretch;
+	/* height: 40px; */ /* 내부 콘텐츠에 따라 높이 유동적 */
+	position: relative; /* static으로 변경하거나, absolute 사용 시 left, top 재조정 */
+	/* left: 17px; */ /* padding으로 대체 */
+	/* top: 2.5px; */
+}
+.main .text {
+	/* 섹션 제목 텍스트 컨테이너 */
+	display: flex;
+	flex-direction: column;
+	gap: 0px;
+	align-items: flex-start;
+	justify-content: flex-start;
+	flex: 1;
+	position: relative;
+}
+.main .title {
+	/* "운동 선택"과 같은 섹션 제목 */
+	color: #000000;
+	text-align: left;
+	font-family: "Roboto-Medium", sans-serif;
+	font-size: 18px;
+	line-height: 24px;
+	font-weight: 500;
+	position: relative;
+	align-self: stretch;
+	margin-top: -1px; /* 디자인 일관성 */
+}
+.main .div {
+	/* "운동 설명" 텍스트 */
+	color: #000000;
+	text-align: left;
+	font-family: "Roboto-Medium", sans-serif;
+	font-size: 16px;
+	line-height: 20px;
+	font-weight: 500;
+	position: relative; /* static으로 변경하거나, absolute 사용 시 위치 재조정 */
+	/* left: 15px; */ /* 부모 요소의 padding으로 관리 */
+	/* top: 76px; */
+	width: 100%; /* 전체 너비 차지 */
+	/* height: 63px; */ /* 내용에 따라 유동적 */
+	margin-top: 8px; /* 위 요소와의 간격 */
+}
+
+/* .vector 및 .img는 구분선으로 보이며, border-bottom으로 대체하는 것이 더 일반적입니다. */
+/*
+.main .vector {
+	height: 1px;
+	left: 14px;
+	object-fit: cover;
+	position: absolute;
+	top: 162px;
+	width: 365px;
+}
+.main .img {
+	height: 1px;
+	left: 14px;
+	object-fit: cover;
+	position: absolute;
+	top: 52px;
+	width: 365px;
+}
+*/
+.main .view:not(:last-child)::after {
+	/* 구분선 역할 */
+	content: "";
+	position: absolute;
+	left: 12px; /* 부모의 padding과 일치 */
+	right: 12px; /* 부모의 padding과 일치 */
+	bottom: -6px; /* 다음 섹션과의 간격을 고려 */
+	height: 1px;
+	background-color: #e0e0e0; /* 구분선 색상 */
+}
+
+.main .view-2 {
+	/* 카메라, 업로드 버튼 컨테이너 */
+	padding: 0px 12px 0px 12px; /* 내부 여백 */
+	display: flex; /* flex로 버튼 정렬 */
+	flex-direction: row; /* 가로 정렬 */
+	gap: 12px; /* 버튼 사이 간격 */
+	align-items: center;
+	justify-content: space-between; /* 버튼들을 양쪽으로 분산 */
+	align-self: stretch;
+	/* height: 52px; */ /* 내부 콘텐츠에 따라 높이 유동적 */
+	position: relative;
+	/* overflow: hidden; */
+}
+.main .camera {
+	background: #ffffff;
+	border-radius: 8px;
+	border-style: solid;
+	border-color: #4c5dff;
+	border-width: 1px;
+	padding: 10px 12px 10px 12px;
+	/* width: 160px; */ /* flex 아이템으로 너비 유동적 또는 flex:1 */
+	flex: 1; /* 가능한 공간을 차지하도록 */
+	height: 45px;
+	position: relative; /* static으로 변경 */
+	/* left: 4px; */
+	/* top: 0px; */
+	box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 8px; /* 아이콘과 텍스트 사이 간격 */
+	cursor: pointer;
+}
+.main .text-wrapper-2 {
+	/* 카메라 버튼 텍스트 */
+	color: #000000;
+	text-align: center;
+	font-family: "Roboto-Medium", sans-serif;
+	font-size: 16px;
+	line-height: 22px;
+	font-weight: 500;
+	position: relative; /* static */
+	/* left: calc(50% - 24px); */ /* flex 중앙 정렬로 대체 */
+	/* top: 11px; */
+	/* width: 83px; */ /* 내용에 맞게 */
+	/* height: 20px; */
+	white-space: nowrap;
+}
+.main .vector-2 {
+	/* 카메라 아이콘 */
+	width: 20px;
+	height: 18px;
+	position: relative; /* static */
+	/* left: 26.5px; */
+	/* top: 12px; */
+	background-image: url(./asset/camera.svg);
+	background-repeat: no-repeat;
+	background-size: contain;
+	flex-shrink: 0; /* 아이콘 크기 고정 */
+}
+.main .upload {
+	background: #3b82f6;
+	border-radius: 8px;
+	padding: 10px 12px 10px 12px; /* 패딩 조정 */
+	/* width: 160px; */
+	flex: 1;
+	height: 45px;
+	position: relative; /* static */
+	/* left: 181.5px; */
+	/* top: 0px; */
+	box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+	cursor: pointer;
+}
+.main .upload-2 {
+	/* 업로드 버튼 텍스트 */
+	color: #ffffff;
+	text-align: center;
+	font-family: "Roboto-Medium", sans-serif;
+	font-size: 16px;
+	line-height: 22px;
+	font-weight: 500;
+	position: relative; /* static */
+	/* left: 69.19px; */
+	/* top: 12px; */
+	/* width: 63px; */
+	/* display: flex; */ /* 부모에서 flex 처리 */
+	/* align-items: center; */
+	/* justify-content: center; */
+	white-space: nowrap;
+}
+.main .material-symbols {
+	/* 업로드 아이콘 컨테이너 */
+	width: 24px;
+	height: 24px;
+	position: relative; /* static */
+	/* left: 31.5px; */
+	/* top: 6px; */
+	/* overflow: visible; */
+	/* aspect-ratio: 1; */
+	flex-shrink: 0;
+}
+.main .vector-3 {
+	/* 업로드 아이콘 */
+	width: 16px; /* 아이콘 실제 크기에 맞게 조정 */
+	height: 16px; /* 아이콘 실제 크기에 맞게 조정 */
+	position: absolute; /* material-symbols 내에서 중앙 정렬 */
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	background-image: url(./asset/upload.svg);
+	background-repeat: no-repeat;
+	background-size: contain;
+}
+
+.main .input {
+	/* 비디오 파일명 표시 영역 컨테이너 */
+	padding: 0px 12px 0px 12px;
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+	align-items: flex-start;
+	justify-content: center;
+	align-self: stretch;
+	flex-shrink: 0;
+	position: relative;
+	/* overflow: hidden; */
+}
+.main .textfield {
+	/* 파일명 표시되는 회색 박스 */
+	border-radius: 6px;
+	border-style: solid;
+	border-color: rgba(0, 0, 0, 0.1);
+	border-width: 1px;
+	padding: 8px 12px 8px 12px;
+	display: flex;
+	flex-direction: row;
+	gap: 4px;
+	align-items: center;
+	justify-content: flex-start;
+	align-self: stretch;
+	flex-shrink: 0;
+	position: relative;
+	min-height: 38px; /* 최소 높이 보장 */
+}
+.main .text-2 {
+	/* "비디오를 업로드 해주세요" 또는 파일명 */
+	color: rgba(0, 0, 0, 0.5);
+	text-align: left;
+	font-family: "Roboto-Regular", sans-serif;
+	font-size: 14px;
+	line-height: 20px;
+	font-weight: 400;
+	position: relative;
+	flex: 1;
+	height: 20px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap; /* 한 줄로 표시, 넘치면 ... */
+	-webkit-line-clamp: 1; /* 웹킷 브라우저에서 한 줄 제한 */
+	-webkit-box-orient: vertical; /* 웹킷 브라우저에서 한 줄 제한 */
+	/* display: -webkit-box; */ /* 필요시 주석 해제 */
+}
+.main .image {
+	/* 비디오 썸네일 표시 영역 */
+	background: rgba(0, 0, 0, 0.05);
+	border-radius: 6px;
+	flex-shrink: 0;
+	width: 353px; /* 고정 너비 유지 또는 align-self: stretch; */
+	align-self: center; /* 중앙 정렬 */
+	height: 200px; /* 높이 조정 (기존 265px에서 줄임) */
+	position: relative;
+	display: flex; /* 내부 p 태그 중앙 정렬 위해 */
+	align-items: center;
+	justify-content: center;
+	overflow: hidden; /* 썸네일 이미지가 넘치지 않도록 */
+}
+.main .image img {
+	/* 썸네일 이미지 스타일 */
+	width: 100%;
+	height: 100%;
+	object-fit: cover; /* 이미지가 영역을 꽉 채우도록 */
+}
+.main .p {
+	/* "비디오 미리보기" 텍스트 */
+	color: #000000;
+	text-align: center;
+	font-family: "Roboto-Medium", sans-serif;
+	font-size: 16px;
+	line-height: 22px;
+	font-weight: 500;
+	position: relative; /* static으로 변경 */
+	/* right: 16px; */ /* flex 중앙 정렬로 대체 */
+	/* left: 16px; */
+	/* top: calc(50% - 13.5px); */
+	/* display: flex; */ /* 부모에서 flex 처리 */
+	/* align-items: flex-end; */
+	/* justify-content: center; */
+	width: auto; /* 내용에 맞게 */
+}
+.main .pagination {
+	/* 현재 사용되지 않는 것으로 보임 */
+	display: none; /* 숨김 처리 */
+	/*
+	display: flex;
+	flex-direction: row;
+	gap: 4px;
+	align-items: center;
+	justify-content: center;
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	bottom: 8px;
+	*/
+}
+/* .rectangle-3343 등 pagination 관련 스타일도 함께 주석 처리 또는 제거 */
+
+.main .text-wrapper-3 {
+	/* "분석하기", "다시 업로드" 버튼 컨테이너의 제목 (현재 JSX에 없음) */
+	color: #000000;
+	text-align: center;
+	font-family: "Roboto-Medium", sans-serif;
+	font-size: 16px;
+	line-height: 22px;
+	font-weight: 500;
+	position: relative;
+	/* width: 154px; */ /* 내용에 맞게 */
+	/* height: 22px; */
+	/* display: flex; */
+	/* align-items: flex-end; */
+	/* justify-content: center; */
+	margin-bottom: 8px; /* 버튼과의 간격 */
+}
+
+/* 하단 네비게이션 바 */
+.main .home-navigation {
+	flex-shrink: 0;
+	width: 100%; /* 부모 요소(.main)의 전체 너비 */
+	height: 79px; /* 디자인에 명시된 높이, 필요시 소수점 제거 또는 조정 */
+	position: absolute; /* .main 컨테이너 하단에 고정 */
+	bottom: 0;
+	left: 0;
+	background-color: #ffffff; /* 배경색 지정 */
+	border-top: 1px solid #e0e0e0; /* 상단 구분선 */
+	display: flex;
+	align-items: center; /* 아이템들 수직 중앙 정렬 */
+	justify-content: space-around; /* 아이템들 수평 균등 배분 */
+	padding: 0 10px; /* 좌우 약간의 여백 */
+	box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.05); /* 위쪽으로 약간의 그림자 */
+}
+
+/* .main .overlap 은 home-navigation 내부의 복잡한 구조였으나, flex로 단순화 */
+/*
+.main .overlap {
+	height: 79px;
+	position: relative;
+}
+*/
+
+.main .chatbot,
+.main .analysis,
+.main .home {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	text-align: center;
+	flex: 1; /* 가능한 공간을 균등하게 차지 */
+	padding: 8px 0; /* 내부 여백 */
+	height: 100%; /* 부모 높이 전체 사용 */
+	position: relative; /* 활성 탭 배경을 위한 기준 */
+}
+
+/* 아이콘 공통 스타일 */
+.main .home-navigation [class^="vector-"] {
+	/* vector-4, vector-5, vector-wrapper의 vector-6 */
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: contain;
+	margin-bottom: 4px; /* 아이콘과 텍스트 사이 간격 */
+}
+
+.main .vector-4 {
+	/* Chatbot 아이콘 (기존 vector-4) */
+	width: 25px;
+	height: 33px; /* 원본 비율 유지 또는 조정 */
+	background-image: url(./asset/Vector-4.svg);
+}
+.main .text-wrapper-4 {
+	/* Chatbot 텍스트 */
+	color: #9ca3af;
+	font-family: "Roboto-Medium", sans-serif;
+	font-size: 12px;
+	line-height: 18px;
+	font-weight: 500;
+	white-space: nowrap;
+}
+
+.main .vector-5 {
+	/* Analysis 아이콘 (기존 vector-5) */
+	width: 28px;
+	height: 20px;
+	background-image: url(./asset/Vector-5.svg);
+}
+.main .text-wrapper-5 {
+	/* Analysis 텍스트 */
+	color: #9ca3af;
+	font-family: "Roboto-Medium", sans-serif;
+	font-size: 12px;
+	line-height: 18px;
+	font-weight: 500;
+	white-space: nowrap;
+}
+
+.main .vector-6 {
+	/* Home 아이콘 (기존 vector-6) */
+	width: 25px;
+	height: 24px;
+	/* vector-wrapper 클래스에 배경 이미지가 있으므로, 여기서는 크기만 지정 */
+}
+.main .vector-wrapper {
+	/* Home 아이콘 배경 (활성 상태 표시용 사각형) */
+	/* 이 부분은 JS로 active 클래스를 부여하고, 해당 클래스에 스타일을 주는 방식으로 변경하는 것이 좋습니다. */
+	/* 아래는 임시로 Home 탭이 활성화된 것처럼 보이게 하는 스타일입니다. */
+	width: 25px; /* 아이콘 크기와 동일하게 */
+	height: 24px; /* 아이콘 크기와 동일하게 */
+	background-image: url(./asset/vector-wrapper.svg); /* 실제로는 Home 아이콘 SVG */
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
+	margin-bottom: 4px;
+	position: relative; /* 내부 .rectangle-active-bg 배치를 위해 */
+}
+.main .home.active .vector-wrapper::before {
+	/* 활성 탭 파란색 배경 예시 */
+	content: "";
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -60%); /* 아이콘보다 살짝 위, 중앙 */
+	width: 60px; /* 배경 크기 */
+	height: 30px; /* 배경 크기 */
+	background-color: #3b82f6;
+	border-radius: 16px;
+	z-index: -1; /* 아이콘 뒤로 */
+}
+
+.main .text-wrapper-6 {
+	/* Home 텍스트 */
+	color: #3b82f6; /* 활성 탭 텍스트 색상 */
+	font-family: "Roboto-Medium", sans-serif;
+	font-size: 12px;
+	line-height: 18px;
+	font-weight: 500;
+	white-space: nowrap;
+}
+.main .home:not(.active) .text-wrapper-6,
+.main .chatbot:not(.active) .text-wrapper-4,
+.main .analysis:not(.active) .text-wrapper-5 {
+	color: #9ca3af; /* 비활성 탭 텍스트 색상 */
+}
+.main .home.active .text-wrapper-6 {
+	color: #3b82f6; /* 활성 탭 텍스트 색상 */
+}
+
+/* .rectangle-3 은 home-navigation의 배경 역할을 했던 것으로 보이며, 이제 불필요 */
+/*
+.main .rectangle-3 {
+	height: 79px;
+	left: 0;
+	position: absolute;
+	top: 0;
+	width: 393px;
+}
+*/
