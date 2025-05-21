@@ -24,7 +24,8 @@ yarn-debug.log*
 yarn-error.log*
 
 # backend 파일
-venv/
+backend/venv_310/
+
 __pycache__/
 *.pyc
 *.pyo

@@ -46,9 +46,14 @@ def upload_video():
     })
 
 # 분석 결과 영상 제공
-@app.route('/result_video/<filename>', methods=['GET'])
+@app.route('/result_video/<filename>')
 def get_result_video(filename):
-    return send_from_directory(app.config['RESULT_FOLDER'], filename)
+    return send_from_directory(
+        app.config['RESULT_FOLDER'],
+        filename,
+        as_attachment=False,
+        mimetype='video/mp4'
+    )
 
 # 서버 실행
 if __name__ == '__main__':
